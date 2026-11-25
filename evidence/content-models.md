@@ -1,52 +1,125 @@
 # Content models
 
-Written before coding. One table per block: what the author writes, and what the block shows.
+## hero (standalone, adapted from the boilerplate)
 
-## hero (adapted from the boilerplate)
+| Hero                                         |
+| -------------------------------------------- |
+| [image: team at work]                        |
+| # Build the web with us                      |
+| We are a small team building fast EDS sites. |
+| **[See open positions](/en/jobs)**           |
 
-| Hero |
-| --- |
-| image · Heading 1 · one paragraph · a **bold** link (becomes the button) |
+- One row, one cell. In order: image, Heading 1, one paragraph, one **bold** link (the lines above are all inside that one cell).
+- The bold link becomes the button.
+- Shows the heading, text and button on top of the image, with a dark overlay for contrast.
+- Only the image and heading are required.
 
-Shows the heading, text and button on top of the image, with a dark overlay for contrast.
+## teaser (standalone, from module 07)
 
-## teaser (from module 07)
+| Teaser (dark) |                                                         |
+| ------------- | ------------------------------------------------------- |
+| [image]       | **Our teams**                                           |
+|               | ## Small teams, real ownership                          |
+|               | One author, one developer and one designer per project. |
+|               | [Meet the team](/en/about)                              |
 
-| Teaser (dark) | |
-| --- | --- |
-| image | **bold** eyebrow paragraph · heading · text · link |
+- One row, two cells: left = the image, right = the text (the right-hand lines are all inside one cell).
+- Right cell, in order: an optional **bold** paragraph (eyebrow), a Heading 2, a short paragraph, a link (call to action).
+- `(dark)` variant is optional. Home has three teasers in one section.
 
-`dark` variant is optional. Home has three teasers in one section.
+## jobs (configuration-style, new)
 
-## jobs (new)
+| Jobs                                     |
+| ---------------------------------------- |
+| [/en/jobs-data.json](/en/jobs-data.json) |
 
-| Jobs |
-| --- |
-| link to the sheet, e.g. `/en/jobs-data.json` |
+- One row, one cell: a link (or plain text path) to the language's jobs sheet.
+- Shows a "Location" select (all locations plus one option per location in the sheet), then one card per job: the role as a heading (linked when `Link` is set) and labels for location and team.
+- When no job matches the filter, a short message is shown. Texts come from the placeholders `filterLocation`, `allLocations`, `noJobs`.
 
-Sheet columns (one sheet per language): `Role`, `Location`, `Team`, `Link` (path to the job page, may be empty).
-Shows one card per row: role (linked when `Link` is set) and labels for location and team. A labelled `<select>` above the list filters by location, with an "all locations" option. When no job matches, a short message is shown. Rows without `Role` are skipped.
-
-## latest-pages (from module 09)
+## latest-pages (configuration-style, from module 09)
 
 | Latest pages |
-| --- |
-| how many pages (default 3) |
+| ------------ |
+| 3            |
 
-Reads the current language's query index (`/<lang>/query-index.json`), newest first, skipping the current page and the language home page.
+- One row, one cell: how many pages to show. Empty or not a number = 3.
+- Shows cards (image, title, description) for the newest pages in `/<lang>/query-index.json`, without the current page and the language home page.
 
-## columns, fragment (boilerplate)
+## columns (collection, boilerplate)
 
-`Columns` on About and in the footer. `Fragment` with `/<lang>/fragments/newsletter` at the end of every page.
+| Columns                            |                         |         |
+| ---------------------------------- | ----------------------- | ------- |
+| ## How we work                     | ## Where we are         | [image] |
+| Small teams, short feedback loops. | Milan, Rome and remote. |         |
 
-## Header and footer documents
+- One row, one cell per column (2–3 columns); each cell can hold several lines. Used on About and in the footer.
 
-Nav: three sections (brand | Jobs, Company ▾ with About and Life | EN, IT). The header code marks the current page and points EN/IT to the same page in the other language.
+## fragment (boilerplate)
 
-## Placeholders (keys read by the code, both languages)
+| Fragment                                             |
+| ---------------------------------------------------- |
+| [/en/fragments/newsletter](/en/fragments/newsletter) |
 
-| Key | EN | IT |
-| --- | --- | --- |
-| filterLocation | Location | Sede |
-| allLocations | All locations | Tutte le sedi |
-| noJobs | No open positions for this location. | Nessuna posizione aperta per questa sede. |
+- One cell with the link to the fragment, at the end of every page.
+- The fragment document is plain content: a Heading 2, one sentence, a **bold** "Subscribe" link.
+
+## metadata (on every page)
+
+| Metadata    |                                                       |
+| ----------- | ----------------------------------------------------- |
+| Title       | Open positions                                        |
+| Description | All open positions at Codeland, by location and team. |
+
+- Two columns, key / value. Title and Description on every page; the root page also has `Robots | noindex`.
+
+## Header document (`/<lang>/nav`)
+
+Three sections separated by section breaks (`---`), no block table:
+
+```
+[Careers at Codeland](/en/)
+---
+- [Jobs](/en/jobs)
+- Company
+  - [About](/en/about)
+  - [Life at Codeland](/en/life)
+---
+- [EN](/en/)
+- [IT](/it/)
+```
+
+`Company` has no link: its nested list makes it the dropdown. The code points EN/IT to the same page in the other language.
+
+## Sheets
+
+`/<lang>/jobs-data` (one row per job; rows without `Role` are skipped, `Link` may be empty):
+
+| Role                | Location | Team        | Link                        |
+| ------------------- | -------- | ----------- | --------------------------- |
+| Front-end developer | Milan    | Engineering | /en/jobs/frontend-developer |
+| Content author      | Rome     | Content     | /en/jobs/content-author     |
+| UX designer         | Remote   | Design      |                             |
+
+`/<lang>/placeholders` (columns `Key` and `Text` in each language's sheet; both languages shown side by side here):
+
+| Key            | Text (EN)                            | Text (IT)                                 |
+| -------------- | ------------------------------------ | ----------------------------------------- |
+| filterLocation | Location                             | Sede                                      |
+| allLocations   | All locations                        | Tutte le sedi                             |
+| noJobs         | No open positions for this location. | Nessuna posizione aperta per questa sede. |
+
+`/metadata` (root, bulk metadata):
+
+| URL         | nav     | footer     | template | Robots  |
+| ----------- | ------- | ---------- | -------- | ------- |
+| /en/\*\*    | /en/nav | /en/footer |          |         |
+| /it/\*\*    | /it/nav | /it/footer |          |         |
+| /\*/jobs/\*\* |       |            | article  |         |
+| /drafts/\*\* |        |            |          | noindex |
+
+`/redirects` (root):
+
+| Source   | Destination |
+| -------- | ----------- |
+| /careers | /en/jobs    |

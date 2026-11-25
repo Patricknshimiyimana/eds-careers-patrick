@@ -1,7 +1,7 @@
 # Capstone plan: folder structure
 
 Careers microsite in two languages. Same paths in each language, so the language switch can swap `/en/` for `/it/`.
-The folders are created in da.live (https://da.live/#/patricknshimiyimana/eds-careers-patrick), not in this repo.
+The folders are created in da.live (https://da.live/#/patricknshimiyimana/eds-careers-patrick).
 
 ```
 /                          language choice (English / Italiano), noindex
@@ -22,5 +22,6 @@ The folders are created in da.live (https://da.live/#/patricknshimiyimana/eds-ca
 ```
 
 Decisions:
+
 - Header dropdown: **Company** with About and Life at the company.
 - One jobs sheet per language, so role and location names can be translated.
