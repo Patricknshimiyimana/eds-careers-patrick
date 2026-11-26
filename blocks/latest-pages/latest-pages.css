@@ -1,0 +1,40 @@
+.latest-pages > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.latest-pages > ul > li {
+  border: 1px solid var(--light-color, #f8f8f8);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.latest-pages a:any-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.latest-pages .latest-pages-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.latest-pages .latest-pages-body {
+  margin: 16px;
+}
+
+.latest-pages .latest-pages-body h3 {
+  margin-top: 0;
+}
+
+.latest-pages a:hover h3 {
+  text-decoration: underline;
+}
