@@ -9,11 +9,26 @@
   min-height: 300px;
 }
 
-.hero h1 {
+.hero h1,
+.hero p {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   color: var(--background-color);
+}
+
+/* darken the image so the white text keeps enough contrast */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(0 0 0 / 45%);
+}
+
+.hero p.button-wrapper a.button {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .hero picture {
