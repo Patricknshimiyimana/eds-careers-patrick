@@ -1,0 +1,67 @@
+.jobs .jobs-filter {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.jobs .jobs-filter select {
+  font: inherit;
+  padding: 6px 10px;
+  border: 1px solid var(--dark-color);
+  border-radius: 4px;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.jobs .jobs-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.jobs ul {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jobs li {
+  padding: 16px 24px;
+  border: 1px solid var(--light-color);
+  border-radius: 8px;
+  background: var(--light-color);
+}
+
+.jobs li[hidden] {
+  display: none;
+}
+
+.jobs h2 {
+  font-size: var(--heading-font-size-s);
+  margin: 0 0 8px;
+}
+
+.jobs .jobs-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+
+.jobs .jobs-meta span {
+  padding: 2px 10px;
+  border-radius: 12px;
+  background: var(--background-color);
+  font-size: var(--body-font-size-xs);
+}
+
+@media (width >= 900px) {
+  .jobs ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
